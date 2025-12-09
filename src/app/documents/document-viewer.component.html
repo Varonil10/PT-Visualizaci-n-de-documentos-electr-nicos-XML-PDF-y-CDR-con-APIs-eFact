@@ -1,0 +1,42 @@
+<div class="container">
+  <h2>Visualización de Documentos</h2>
+
+  <div class="search-box">
+    <input type="text"
+    placeholder="Ingrese el ticket (use: demo)"
+    [(ngModel)]="ticket">
+
+    <button (click)="fetchDocuments()">Buscar</button>
+  </div>
+
+  <div *ngIf="loading">Cargando documentos...</div>
+
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+
+  <!-- XML -->
+  <div *ngIf="xmlContent">
+    <h3>XML</h3>
+    <pre class="xml-box">{{ xmlContent }}</pre>
+  </div>
+
+  <!-- PDF -->
+  <div *ngIf="pdfUrl">
+    <h3>PDF</h3>
+    <object [data]="pdfUrl" type="application/pdf" width="100%" height="600px">
+      <p>No se puede mostrar el PDF. <a [href]="pdfUrl" download>Descargar PDF</a></p>
+    </object>
+
+    
+
+    <br><br>
+    <a [href]="pdfUrl" download="factura.pdf">Descargar PDF</a>
+  </div>
+
+  <!-- CDR -->
+  <div *ngIf="cdrContent">
+    <h3>CDR (Constancia de Recepción)</h3>
+    <pre class="cdr-box">{{ cdrContent }}</pre>
+  </div>
+</div>
